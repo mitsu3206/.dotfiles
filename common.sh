@@ -17,15 +17,22 @@ prepend_path() {
 prepend_path "$HOME/.local/bin"
 
 # --- 共通のエイリアス ---
+alias ..='cd ..'
 alias ll='ls -la'
 alias la='ls -A'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -h'
 alias gs='git status'
 alias gd='git diff'
-alias ..='cd ..'
 
 # --- シェルごとの分岐 ---
 if [ -n "$BASH_VERSION" ]; then
   # bash 固有の設定
+  export HISTCONTROL=ignoreboth:erasedups
   shopt -s histappend
   HISTFILESIZE=20000
   alias reload='source ~/.bashrc'
@@ -44,7 +51,8 @@ if [ -n "$BASH_VERSION" ]; then
 
 elif [ -n "$ZSH_VERSION" ]; then
   # zsh 固有の設定
-  setopt HIST_IGNORE_DUPS
+  setopt HIST_IGNORE_ALL_DUPS  # 過去に同じコマンドがあれば古い方を削除
+  setopt HIST_REDUCE_BLANKS    # 余分な空白を詰めて記録
   setopt SHARE_HISTORY
   SAVEHIST=20000
   alias reload='source ~/.zshrc'
@@ -60,4 +68,8 @@ elif [ -n "$ZSH_VERSION" ]; then
   if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
   fi
+fi
+
+if [ -f "$HOME/.dotfiles/local.sh" ]; then
+  . "$HOME/.dotfiles/local.sh"
 fi

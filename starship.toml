@@ -1,0 +1,33 @@
+# ~/.config/starship.toml
+
+# プロンプトを1行にする（true にすると入力行の前に改行が入る）
+add_newline = true
+
+# フォーマット（表示する要素の並び順を明示してスッキリさせる）
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+symbol = "git:"
+style = "bold purple"
+
+[git_status]
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 2000
+format = "took [$duration](bold yellow) "
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
