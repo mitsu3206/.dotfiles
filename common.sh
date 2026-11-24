@@ -45,6 +45,10 @@ if [ -n "$BASH_VERSION" ]; then
     . /usr/share/bash-completion/bash_completion
   fi
 
+  if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+  fi
+
   if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
   fi
@@ -64,6 +68,10 @@ elif [ -n "$ZSH_VERSION" ]; then
 
   autoload -Uz compinit
   compinit
+
+  if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+  fi
 
   if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
