@@ -54,6 +54,11 @@ if [ -n "$BASH_VERSION" ]; then
     eval "$(direnv hook bash)"
   fi
 
+  # mise: 言語ランタイムや開発ツールのバージョンをまとめて管理するツール（node, python など）
+  if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate bash)"
+  fi
+
   if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
   fi
@@ -76,6 +81,11 @@ elif [ -n "$ZSH_VERSION" ]; then
 
   if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
+  fi
+
+  # mise: 言語ランタイムや開発ツールのバージョンをまとめて管理するツール（node, python など）
+  if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate zsh)"
   fi
 
   if command -v starship >/dev/null 2>&1; then
