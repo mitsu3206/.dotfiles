@@ -20,6 +20,7 @@ prepend_path "$HOME/.local/bin"
 alias ..='cd ..'
 alias ll='ls -la'
 alias la='ls -A'
+alias ls='ls --color=auto'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
