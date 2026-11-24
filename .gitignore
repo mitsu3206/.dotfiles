@@ -1,0 +1,10 @@
+# マシン固有の設定（common.sh から読み込まれる）
+local.sh
+
+# setup_shell.sh がバックアップとして作るファイル
+*.bak
+
+# Vim の一時ファイル
+*.swp
+*.swo
+*~
