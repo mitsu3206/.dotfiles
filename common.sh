@@ -39,6 +39,11 @@ if [ -n "$BASH_VERSION" ]; then
   bind '"\e[A": history-search-backward' 2>/dev/null  # ↑ キー
   bind '"\e[B": history-search-forward'  2>/dev/null  # ↓ キー
 
+  # Tab で候補を順に挿入（zsh と同じ動き）、Shift+Tab で逆順
+  bind '"\t": menu-complete' 2>/dev/null
+  bind '"\e[Z": menu-complete-backward' 2>/dev/null
+  bind 'set show-all-if-ambiguous on' 2>/dev/null
+
   if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   elif [ -f /usr/share/bash-completion/bash_completion ]; then
