@@ -29,6 +29,7 @@ alias df='df -h'
 alias du='du -h'
 alias gs='git status'
 alias gd='git diff'
+alias herdr='herdr-app'
 
 # --- シェルごとの分岐 ---
 if [ -n "$BASH_VERSION" ]; then
