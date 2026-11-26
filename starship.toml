@@ -9,6 +9,7 @@ $directory\
 $git_branch\
 $git_status\
 $aws\
+$azure\
 $cmd_duration\
 $line_break\
 $character"""
@@ -38,3 +39,9 @@ symbol = "aws:"
 style = "bold yellow"
 force_display = true
 format = '[$symbol($profile )(\($region\) )]($style)'
+
+[azure]
+disabled = false
+symbol = "az:"
+style = "bold blue"
+format = '[$symbol($subscription)]($style) '
