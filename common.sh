@@ -46,6 +46,13 @@ if [ -n "$BASH_VERSION" ]; then
   bind '"\e[Z": menu-complete-backward' 2>/dev/null
   bind 'set show-all-if-ambiguous on' 2>/dev/null
 
+  # 補完の見た目と挙動（readline）
+  bind 'set completion-ignore-case on'        # 大文字小文字を区別しない補完
+  bind 'set colored-stats on'                 # 補完候補の種類を色分け
+  bind 'set colored-completion-prefix on'     # 補完で一致する部分を色付け
+  bind 'set mark-symlinked-directories on'    # シンボリックリンクに / を付ける
+  bind 'set visible-stats on'                 # ls -F のような記号を補完候補に表示
+
   if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   elif [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -69,6 +76,8 @@ elif [ -n "$ZSH_VERSION" ]; then
   # zsh 固有の設定
   setopt HIST_IGNORE_ALL_DUPS  # 過去に同じコマンドがあれば古い方を削除
   setopt HIST_REDUCE_BLANKS    # 余分な空白を詰めて記録
+  setopt HIST_FIND_NO_DUPS        # 履歴検索で重複を表示しない
+  setopt HIST_EXPIRE_DUPS_FIRST   # 容量超過時は重複を先に削除
   setopt SHARE_HISTORY
   SAVEHIST=20000
   alias reload='source ~/.zshrc'
@@ -80,6 +89,11 @@ elif [ -n "$ZSH_VERSION" ]; then
 
   autoload -Uz compinit
   compinit
+
+  # 補完（compinit の後に置く）
+  zstyle ':completion:*' menu select                    # 候補を矢印キーで選択
+  zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'   # 小文字入力で大文字も補完
+  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"  # 補完候補を色付け
 
   if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
